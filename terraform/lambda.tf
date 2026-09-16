@@ -25,5 +25,5 @@ resource "aws_lambda_function" "hello_world" {
     aws_iam_role_policy_attachment.lambda_logs,
 	]
 
-  timeout = 10
+  timeout = 30
 }
