@@ -12,6 +12,7 @@ resource "aws_lambda_function" "hello_world" {
   handler = "app.lambda_handler_v1"
 
   filename = "${path.module}/lambda_function.zip"
+  source_code_hash = filebase64sha256("${path.module}/lambda_function.zip")
   logging_config {
     log_format = "Text" # Or "JSON"
     log_group  = aws_cloudwatch_log_group.lambda_logs.name
