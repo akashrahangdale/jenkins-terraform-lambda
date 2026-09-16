@@ -20,40 +20,65 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                dir('terraform') {
-                    sh 'terraform init'
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'aws-jenkins']
+                ]) {
+                    dir('terraform') {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
 
         stage('Terraform Validate') {
             steps {
-                dir('terraform') {
-                    sh 'terraform validate'
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'aws-jenkins']
+                ]) {
+                    dir('terraform') {
+                        sh 'terraform validate'
+                    }
                 }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                dir('terraform') {
-                    sh 'terraform plan'
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'aws-jenkins']
+                ]) {
+                    dir('terraform') {
+                        sh 'terraform plan'
+                    }
                 }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                dir('terraform') {
-                    sh 'terraform apply -auto-approve'
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'aws-jenkins']
+                ]) {
+                    dir('terraform') {
+                        sh 'terraform apply -auto-approve'
+                    }
                 }
             }
         }
 
         stage('Terraform Output') {
             steps {
-                dir('terraform') {
-                    sh 'terraform output'
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'aws-jenkins']
+                ]) {
+                    dir('terraform') {
+                        sh 'terraform output'
+                    }
                 }
             }
         }
